@@ -8,7 +8,7 @@ import CommonTable from '../../common/CommonTable'
 
 const Marca = () => {
 	const initialState = {
-	Marca: '',
+	marca: '',
 	
 };
 
@@ -22,7 +22,11 @@ const Marca = () => {
 	const init = async () => {
 		const { data } = await ApiRequest().get('/marcas')
 		setUsuariosList(data)
+
+		
 	}
+
+	
 
 	const columns = [
 	{ field: 'id', headerName: 'ID', width: 120 },
@@ -88,6 +92,14 @@ const Marca = () => {
 	}
 
 	const onSubmit = async () => {
+		if ( !body.marca) {
+			setMensaje({
+			  ident: new Date().getTime(),
+			  message: 'Todos los campos marcados son obligatorios.',
+			  type: 'error',
+			});
+			return;
+		  }
 		try {
 			const { data } = await ApiRequest().post('marca/guardar', body)
 			handleDialog()
@@ -135,7 +147,7 @@ const Marca = () => {
 
 				<Dialog maxWidth='xs' open={openDialogDelete} onClose={handleDialogDelete}>
 				<DialogTitle>
-					¿Desea eliminar esta marca?
+					¿Desea eliminar esta linea de vehículo?
 				</DialogTitle>
 				<DialogContent>
 					<Typography variant='h5'>Esta acción es irreversible</Typography>
@@ -148,25 +160,26 @@ const Marca = () => {
 			
 			<Dialog maxWidth='xs' open={openDialog} onClose={handleDialog}>
 				<DialogTitle>
-					{isEdit ? 'Editar Marca' : 'Crear Marca'}
+					{isEdit ? 'Editar marca' : 'Crear marca'}
 				</DialogTitle>
 				<DialogContent>
 					<Grid container spacing={2}>
 						
 						<Grid item xs={12} sm={12}>
-							<TextField
+						<TextField
 								margin='normal'
-								name='Marca'
-								value={body.Marca}
+								name='marca'
+								value={body.marca}
 								onChange={onChange}
 								variant='outlined'
 								size='small'
 								color='primary'
 								fullWidth
-								label='Nombre de marca'
+								label='Ingrese marca'
 							/>
 							
 						</Grid>
+				
 					</Grid>
 				</DialogContent>
 				<DialogActions>
@@ -182,7 +195,7 @@ const Marca = () => {
 					</Box>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={4}>
-							<Button onClick={handleDialog} startIcon={<AddOutlined />} variant='contained' color='primary'>Nuevo</Button>
+						<Button onClick={() => {setIsEdit(false); handleDialog(); setBody(initialState);}} startIcon={<AddOutlined />} variant='contained' color='primary'> Nuevo</Button>
 						</Grid>
 						<Grid item xs={12} sm={8} />
 						<Grid item xs={12} sm={12}>
@@ -195,5 +208,5 @@ const Marca = () => {
 	)
 }
 
-export default Marca 
+export default Marca
 

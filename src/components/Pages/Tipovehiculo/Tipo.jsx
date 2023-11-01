@@ -92,6 +92,14 @@ const Tipo = () => {
 	}
 
 	const onSubmit = async () => {
+		if (!body.linea ) {
+			setMensaje({
+			  ident: new Date().getTime(),
+			  message: 'Todos los campos marcados son obligatorios.',
+			  type: 'error',
+			});
+			return;
+		  }
 		try {
 			const { data } = await ApiRequest().post('tipo/guardar', body)
 			handleDialog()
@@ -152,7 +160,7 @@ const Tipo = () => {
 			
 			<Dialog maxWidth='xs' open={openDialog} onClose={handleDialog}>
 				<DialogTitle>
-					{isEdit ? 'Crear Linea' : 'Crear Linea'}
+					{isEdit ? 'Editar Linea' : 'Crear Linea'}
 				</DialogTitle>
 				<DialogContent>
 					<Grid container spacing={2}>
@@ -179,7 +187,7 @@ const Tipo = () => {
 					<Button variant='contained' color='primary' onClick={isEdit ? () => onEdit() : () => onSubmit()}>guardar</Button>
 				</DialogActions>
 			</Dialog>
-			<Page title="Predio| Marcas">
+			<Page title="Predio| Tipo">
 				<ToastAutoHide message={mensaje} />
 				<Container maxWidth='lg'>
 					<Box sx={{ pb: 5 }}>
@@ -187,7 +195,7 @@ const Tipo = () => {
 					</Box>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={4}>
-							<Button onClick={handleDialog} startIcon={<AddOutlined />} variant='contained' color='primary'>Nuevo</Button>
+						<Button onClick={() => {setIsEdit(false); handleDialog(); setBody(initialState);}} startIcon={<AddOutlined />} variant='contained' color='primary'> Nuevo</Button>
 						</Grid>
 						<Grid item xs={12} sm={8} />
 						<Grid item xs={12} sm={12}>

@@ -93,7 +93,7 @@ const form = useRef();
 		try {
 
 			e.preventDefault();
-    		emailjs.sendForm('service_cvz0wu8', 'template_maipbes', form.current, 'mZIJiHooh3_oOUL7N')
+    		emailjs.sendForm('service_zys27sa', 'template_ddgeo6m', form.current, 'QVoBzMEEglUb8oIsn')
       		.then((result) => {
           console.log(result.text);
       			}, (error) => {

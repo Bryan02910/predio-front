@@ -96,6 +96,7 @@ const Usuarios = () => {
 
 	const handleDialog = () => {
 		setOpenDialog(prev => !prev)
+		//setIsEdit(false); 
 	}
 
 	const handleDialogDelete = () => {
@@ -319,7 +320,7 @@ const Usuarios = () => {
 					</Box>
 					<Grid container spacing={2}>
 						<Grid item xs={12} sm={4}>
-							<Button onClick={handleDialog} startIcon={<AddOutlined />} variant='contained' color='primary'>Nuevo</Button>
+						<Button onClick={() => {setIsEdit(false); handleDialog(); setBody(initialState);}} startIcon={<AddOutlined />} variant='contained' color='primary'> Nuevo</Button>
 						</Grid>
 						<Grid item xs={12} sm={8} />
 						<Grid item xs={12} sm={12}>

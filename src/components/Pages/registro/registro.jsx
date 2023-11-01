@@ -305,7 +305,7 @@ const sendEmail = async (e) => {
     <nav className="navbar navbar-dark bg-dark">
       <div className="container">
         <a href="#!" className="navbar-brand">
-          Crear cita
+          Crear documento de venta
         </a>
       </div>
     </nav>
