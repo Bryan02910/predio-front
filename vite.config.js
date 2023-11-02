@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     // Configura el proxy para redirigir todas las solicitudes al host deseado.
     proxy: {
-      '/api': 'https://predio-front.onrender.com', // Si tienes rutas API
+      '/api': 'https://predio-back.onrender.com', // Si tienes rutas API
     },
   },
 })
